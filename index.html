@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <header class="app-header">
+        <h1 class="app-title">Resume Generator</h1>
+        <div class="app-actions">
+            <button id="saveDraftBtn">Save Draft</button>
+            <button id="loadDraftBtn">Load Draft</button>
+            <button id="resetBtn">Reset</button>
+            <button id="downloadPdfBtn">Download PDF</button>
+            <button id="exportJsonBtn">Export JSON</button>
+            <button id="importJsonBtn">Import JSON</button>
+        </div>
+    </header>
+    
+    <main class="app-container">
+        <div class="pane form-pane">
+            <form id="resumeForm">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">Contact Information</h2>
+                    <div class="accordion-content">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Role / Title</label>
+                            <input type="text" id="role" name="role">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" id="location" name="location">
+                        </div>
+                        <div class="form-group">
+                            <label for="linkedin">LinkedIn Profile URL</label>
+                            <input type="url" id="linkedin" name="linkedin">
+                        </div>
+                        <div class="form-group">
+                            <label for="github">GitHub Profile URL</label>
+                            <input type="url" id="github" name="github">
+                        </div>
+                        <div class="form-group">
+                            <label for="portfolio">Portfolio URL</label>
+                            <input type="url" id="portfolio" name="portfolio">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">Summary</h2>
+                    <div class="accordion-content">
+                        <div class="form-group">
+                            <textarea id="summary" name="summary" rows="4"></textarea>
+                            <small class="guidance">1-4 sentences. Highlight your top skills and experience.</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">Experience</h2>
+                    <div class="accordion-content" id="experience-container">
+                        <div class="add-item-container">
+                            <button type="button" class="btn-add-item" data-section="experience">Add Experience</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">Projects</h2>
+                    <div class="accordion-content" id="projects-container">
+                        <div class="add-item-container">
+                            <button type="button" class="btn-add-item" data-section="projects">Add Project</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">Skills</h2>
+                    <div class="accordion-content" id="skills-container">
+                        <div class="add-item-container">
+                            <button type="button" class="btn-add-item" data-section="skills">Add Skill Group</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">Education</h2>
+                    <div class="accordion-content" id="education-container">
+                        <div class="add-item-container">
+                            <button type="button" class="btn-add-item" data-section="education">Add Education</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">Achievements</h2>
+                    <div class="accordion-content">
+                        <div class="form-group">
+                            <textarea id="achievements" name="achievements" rows="4"></textarea>
+                            <small class="guidance">List key awards or accomplishments.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">Certifications</h2>
+                    <div class="accordion-content">
+                        <div class="form-group">
+                            <textarea id="certifications" name="certifications" rows="4"></textarea>
+                            <small class="guidance">List your certifications and issuing organizations.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header">Other Details</h2>
+                    <div class="accordion-content">
+                        <div class="form-group">
+                            <textarea id="otherDetails" name="otherDetails" rows="4"></textarea>
+                            <small class="guidance">Publications, Hackathons, Volunteering, etc.</small>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        
+        <div class="pane preview-pane" id="resume-preview">
+            <div class="resume-wrapper">
+                <div class="resume-section" id="preview-contact"></div>
+                <div class="resume-section" id="preview-summary"></div>
+                <div class="resume-section" id="preview-experience"></div>
+                <div class="resume-section" id="preview-projects"></div>
+                <div class="resume-section" id="preview-skills"></div>
+                <div class="resume-section" id="preview-education"></div>
+                <div class="resume-section" id="preview-achievements"></div>
+                <div class="resume-section" id="preview-certifications"></div>
+                <div class="resume-section" id="preview-otherDetails"></div>
+            </div>
+        </div>
+    </main>
+
+    <input type="file" id="json-input" accept="application/json" style="display: none;">
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,397 @@
+/* --- Global Styles & Variables --- */
+:root {
+    /* Colors */
+    --color-text-primary: #333;
+    --color-text-secondary: #666;
+    --color-border: #ddd;
+    --color-background-light: #f9f9f9;
+    --color-accent: #007bff;
+    --color-danger: #dc3545;
+
+    /* Spacing */
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+
+    /* Typography */
+    --font-family-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-size-base: 1rem;
+    --font-size-sm: 0.875rem;
+    --font-size-lg: 1.25rem;
+    --font-size-xl: 1.5rem;
+    --font-size-xxl: 2rem;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family-system);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-background-light);
+}
+
+/* --- Layout --- */
+.app-header {
+    background-color: #fff;
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-md) var(--space-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.app-title {
+    margin: 0;
+    font-size: var(--font-size-xl);
+    font-weight: 600;
+}
+
+.app-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.app-container {
+    display: flex;
+    min-height: calc(100vh - 65px); /* Adjust based on header height */
+}
+
+.pane {
+    padding: var(--space-lg);
+    overflow-y: auto;
+}
+
+.form-pane {
+    flex: 1;
+    max-width: 50%;
+    background-color: #fff;
+    border-right: 1px solid var(--color-border);
+}
+
+.preview-pane {
+    flex: 1;
+    padding: var(--space-lg) var(--space-md);
+    background-color: var(--color-background-light);
+}
+
+/* --- Form Styles --- */
+.accordion-item {
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    margin-bottom: var(--space-md);
+    background-color: #fff;
+}
+
+.accordion-header {
+    margin: 0;
+    padding: var(--space-md);
+    cursor: pointer;
+    font-size: var(--font-size-lg);
+    font-weight: 500;
+    background-color: #f2f2f2;
+    border-bottom: 1px solid var(--color-border);
+}
+.accordion-header:hover {
+    background-color: #e6e6e6;
+}
+.accordion-header::before {
+    content: '▶';
+    display: inline-block;
+    margin-right: var(--space-sm);
+    transition: transform 0.2s;
+}
+.accordion-item.open .accordion-header::before {
+    transform: rotate(90deg);
+}
+.accordion-item.open .accordion-content {
+    display: block;
+}
+
+.accordion-content {
+    display: none;
+    padding: var(--space-md);
+}
+
+.form-group {
+    margin-bottom: var(--space-md);
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: var(--space-sm);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    font-family: var(--font-family-system);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.guidance {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+.form-item {
+    border: 1px solid var(--color-border);
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+    border-radius: 4px;
+    background-color: var(--color-background-light);
+}
+
+.form-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+}
+
+.form-item-header h3 {
+    margin: 0;
+    font-size: var(--font-size-base);
+    font-weight: 500;
+}
+
+.form-item-actions {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* --- Button Styles --- */
+button {
+    cursor: pointer;
+    border: 1px solid var(--color-border);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-family: var(--font-family-system);
+    background-color: #fff;
+    color: var(--color-text-primary);
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+button:hover {
+    background-color: #f2f2f2;
+}
+
+.btn-add-item {
+    width: 100%;
+    color: var(--color-accent);
+    border: 1px dashed var(--color-accent);
+    background-color: transparent;
+}
+.btn-add-item:hover {
+    background-color: var(--color-accent);
+    color: #fff;
+}
+
+.btn-icon {
+    border: none;
+    padding: 0.25rem;
+    background: none;
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+}
+.btn-icon:hover {
+    color: var(--color-text-primary);
+}
+
+.btn-delete {
+    color: var(--color-danger);
+}
+.btn-delete:hover {
+    background-color: #ffebeb;
+    color: var(--color-danger);
+}
+
+/* --- Resume Preview Styles --- */
+.resume-wrapper {
+    background-color: #fff;
+    padding: var(--space-xl);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.resume-section {
+    margin-bottom: var(--space-lg);
+    line-height: 1.4;
+}
+.resume-section:not(:last-child) {
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.resume-header {
+    text-align: center;
+}
+.resume-header h1 {
+    margin: 0;
+    font-size: var(--font-size-xxl);
+    font-weight: 700;
+    line-height: 1.2;
+}
+.resume-header h2 {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    font-weight: 400;
+    color: var(--color-text-secondary);
+}
+.resume-header .contact-info {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-top: var(--space-sm);
+}
+.resume-header .contact-info span:not(:last-child)::after {
+    content: ' | ';
+    color: #ccc;
+}
+.resume-header .contact-info a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+}
+.resume-header .contact-info a:hover {
+    text-decoration: underline;
+}
+
+.resume-section h2 {
+    margin: 0 0 var(--space-md);
+    font-size: var(--font-size-lg);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--color-text-primary);
+    padding-bottom: 0.25rem;
+}
+
+.resume-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.resume-list-item {
+    margin-bottom: var(--space-md);
+}
+
+.resume-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-weight: 600;
+}
+.resume-item-header .title {
+    font-size: var(--font-size-base);
+}
+.resume-item-header .location-dates {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+.resume-list-bullets {
+    margin: 0.5rem 0 0 1.25rem;
+    padding: 0;
+}
+.resume-list-bullets li {
+    margin-bottom: 0.25rem;
+}
+
+.resume-skills-group {
+    margin-bottom: var(--space-sm);
+}
+.resume-skills-group h3 {
+    display: inline;
+    margin: 0;
+    font-weight: 600;
+}
+.resume-skills-group span {
+    color: var(--color-text-secondary);
+}
+
+/* --- Print CSS --- */
+@media print {
+    body {
+        background-color: #fff;
+        margin: 0;
+    }
+    
+    .app-header, .form-pane, .app-actions {
+        display: none;
+    }
+    
+    .app-container {
+        min-height: auto;
+        display: block;
+    }
+    
+    .pane {
+        width: 100%;
+        max-width: none;
+        padding: 0;
+        border: none;
+        overflow-y: visible;
+    }
+    
+    .preview-pane {
+        padding: 0;
+        background-color: #fff;
+    }
+    
+    .resume-wrapper {
+        box-shadow: none;
+        border: none;
+        width: 100%;
+        padding: 0.75in;
+        font-size: 11pt;
+    }
+
+    .resume-section {
+        margin-bottom: 1.25rem;
+        padding-bottom: 1.25rem;
+    }
+    
+    .resume-section:not(:last-child) {
+        border-bottom: 1px solid #ddd;
+    }
+    
+    @page {
+        size: A4;
+        margin: 0.75in;
+    }
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1024px) {
+    .app-container {
+        flex-direction: column;
+    }
+    
+    .form-pane, .preview-pane {
+        max-width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--color-border);
+    }
+}
